@@ -1,5 +1,6 @@
 export default interface ImageInterface {
-  data: string;
+  url: string;
   title: string;
   date: string;
+  explanation: string;
 }

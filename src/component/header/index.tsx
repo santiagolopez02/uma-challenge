@@ -1,4 +1,4 @@
-import { HeaderProps } from "@/interfaces";
+import { HeaderProps } from "@/types";
 import React from "react";
 
 const Header: React.FC<HeaderProps> = ({ image }) => {

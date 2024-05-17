@@ -2,5 +2,10 @@ import { HeaderContainer, BodyCalendar } from "@/containers";
 import React from "react";
 
 export default function Page() {
-  return <main></main>;
+  return (
+    <main>
+      <HeaderContainer />
+      <BodyCalendar />
+    </main>
+  );
 }
