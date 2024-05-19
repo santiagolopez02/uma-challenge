@@ -33,7 +33,7 @@ const DayCard: React.FC<DayCardProps> = ({
         className="relative w-[250px] h-[250px] rounded-xl cursor-pointer shadow hover:shadow-md hover:shadow-nasa-gray-warm-dark"
         onClick={handleOpen}
       >
-        {media_type === "image" ? (
+        {media_type === "image" && (
           <Image
             src={image}
             alt={title}
@@ -41,9 +41,11 @@ const DayCard: React.FC<DayCardProps> = ({
             className="rounded-xl opacity-85 hover:opacity-100"
             priority
           />
-        ) : (
+        )}
+        {media_type === "video" && (
           <div className="w-full h-full bg-nasa-gray-warm-dark rounded-xl"></div>
         )}
+
         <div className="absolute top-0 right-3">
           <p className="text-nasa-red font-nasa underline font-semibold ">
             {dayOfWeek}
