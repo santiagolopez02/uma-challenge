@@ -1,11 +1,15 @@
-import { HeaderContainer, BodyCalendar } from "@/containers";
-import React from "react";
+import { Footer, Header } from "@/component";
+import { BodyCalendar } from "@/containers";
+import React, { memo } from "react";
+
+const MemoizedHeader = memo(Header);
 
 export default function Page() {
   return (
-    <main>
-      <HeaderContainer />
+    <main className="min-h-screen bg-white">
+      <MemoizedHeader />
       <BodyCalendar />
+      <Footer />
     </main>
   );
 }

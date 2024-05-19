@@ -6,23 +6,28 @@ const DayCard: React.FC<DayCardProps> = ({
   image,
   title,
   date,
-  coments,
+  comments,
   media_type,
 }) => {
-  return media_type === "image" ? (
-    <Image src={image} width={500} height={500} alt="Picture of the author" />
-  ) : (
-    <div></div>
+  return (
+    <div className="relative w-[250px] h-[250px] rounded-xl  cursor-pointer shadow shadow-red-500 hover:shadow-lg ">
+      {media_type === "image" ? (
+        <Image
+          src={image}
+          alt="Picture of the author"
+          fill={true}
+          className="rounded-xl cursor-pointer"
+        />
+      ) : (
+        <div className="w-full h-full bg-red-500 rounded-xl"></div>
+      )}
+      <div className="absolute top-3 right-3">
+        <p className="text-red-500 font-orbitron">{date}</p>
+      </div>
+      <div className="absolute bottom-2 left-2 ">
+        <p className="text-red-500">{title}</p>
+      </div>
+    </div>
   );
-  /*    <div
-      style={{
-        backgroundImage: `url(${image})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      <p>{date}</p>
-      <p>{title}</p>
-    </div> */
 };
 export default DayCard;

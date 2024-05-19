@@ -1,3 +1,4 @@
 import Header from "./header";
 import DayCard from "./day-card";
-export { Header, DayCard };
+import Footer from "./footer";
+export { Header, DayCard, Footer };
