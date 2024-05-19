@@ -1,12 +1,11 @@
 import { DayCard } from "@/component";
 import { apiService } from "@/models";
-import { ImageInterface } from "@/types";
-import axios from "axios";
+import ImageInterface from "@/types/image";
 
 import { useEffect, useState } from "react";
 
 /**
- * Función para obtener el rango por mes
+ * Function to get the range per month
  * @param offset
  * @returns {
  * lastDay: string,
@@ -34,13 +33,13 @@ function getFirstAndLastDayOfMonth(offset: number = 0): {
 
   return { firstDay: firstDayFormatted, lastDay: lastDayFormatted };
 }
-const URL_GET_DATA = `http://localhost:8000/v1/apod?start_date=2024-05-01&end_date=2024-05-16`;
-const BodyCalendar: React.FC = () => {
-  const [monthOffset, setMonthOffset] = useState(0);
-  const [rangeDays, setRangeDays] = useState({});
-  const [imageDays, setImageDays] = useState([]);
 
-  //Se setea el rango de fechas cuando carga el componente o monthOffser
+const BodyCalendar: React.FC = () => {
+  const [monthOffset, setMonthOffset] = useState<number>(0);
+  const [rangeDays, setRangeDays] = useState<object>({});
+  const [imageDays, setImageDays] = useState<ImageInterface[]>();
+
+  //Set rangeDays state when loading the component or monthOffser
   useEffect(() => {
     const { firstDay, lastDay } = getFirstAndLastDayOfMonth(monthOffset);
     setRangeDays({ firstDay, lastDay });
@@ -49,7 +48,8 @@ const BodyCalendar: React.FC = () => {
   useEffect(() => {
     if (Object.keys(rangeDays).length) {
       const fetchedData = async () => {
-        const data = await apiService.getAllData();
+        const data = await apiService.getAllData("2024-05-01", "2024-05-16");
+        setImageDays(data);
         console.log("data", data);
       };
 
@@ -71,16 +71,28 @@ const BodyCalendar: React.FC = () => {
   };
 
   return (
-    <>
-      <div>
-        <div className="calendar-header">
-          <button onClick={handlePrevMonth}>Anterior</button>
+    <section>
+      <div className="calendar-header">
+        <button onClick={handlePrevMonth}>Anterior</button>
 
-          <button onClick={handleNextMonth}>Siguiente</button>
-        </div>
-        <div></div>
+        <button onClick={handleNextMonth}>Siguiente</button>
       </div>
-    </>
+
+      {imageDays && (
+        <div className="grid grid-cols-1 px-4 gap-2">
+          {imageDays?.map((item, index) => (
+            <DayCard
+              key={index}
+              image={item.url}
+              coments={item.explanation}
+              date={item.date}
+              title={item.title}
+              media_type={item.media_type}
+            />
+          ))}
+        </div>
+      )}
+    </section>
   );
 };
 

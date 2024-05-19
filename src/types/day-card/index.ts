@@ -3,4 +3,5 @@ export default interface DayCardProps {
   title: string;
   date: string;
   coments: string;
+  media_type: string;
 }

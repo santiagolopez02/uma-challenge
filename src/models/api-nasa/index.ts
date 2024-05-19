@@ -1,29 +1,23 @@
-import { ApiNASAService, ImageInterface } from "@/types";
+import { ApiNASAService } from "@/types";
+import ImageInterface from "@/types/image";
 import axios, { AxiosResponse } from "axios";
 
-/* const URL_GET_DATA = `${process.env.API_NASA_URL}?api_key=${process.env.API_NASA_TOKEN}`; */
-const URL_GET_DATA = `http://localhost:8000/v1/apod?start_date=2024-05-01&end_date=2024-05-16`;
-
 const apiService: ApiNASAService = {
-  async getAllData() {
+  async getAllData(start_date: string, end_date: string) {
     try {
+      const URL_GET_DATA = `${process.env.NEXT_PUBLIC_API_NASA_URL}?api_key=${process.env.NEXT_PUBLIC_API_NASA_TOKEN}&start_date=${start_date}&end_date=${end_date}`;
       console.log("URL_GET_DATA", URL_GET_DATA);
-
       const response = await axios.get<ImageInterface[]>(URL_GET_DATA);
 
-      const images: ImageInterface[] = response.data;
+      const images: ImageInterface[] = response?.data.map(
+        ({ url, date, title, explanation, media_type }) =>
+          new ImageInterface(url, title, date, explanation, media_type)
+      );
 
       console.log("images", images);
       return images;
     } catch (error) {
-      console.error("Error fetching todo list:", error);
-      let errorImage: ImageInterface = {
-        url: `${error}`,
-        date: new Date().toISOString(),
-        title: "Error fetching todo list",
-        explanation: "",
-      };
-      return [{ ...errorImage }];
+      throw new Error();
     }
   },
 };
