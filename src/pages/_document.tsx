@@ -1,15 +1,11 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import { ReactElement } from "react";
 
 class MyDocument extends Document {
-  render() {
+  render(): ReactElement {
     return (
-      <Html>
-        <Head>
-          <link
-            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap"
-            rel="stylesheet"
-          />
-        </Head>
+      <Html lang="es">
+        <Head />
         <body>
           <Main />
           <NextScript />

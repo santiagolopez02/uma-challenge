@@ -1,15 +1,18 @@
-import { Footer, Header } from "@/component";
-import { BodyCalendar } from "@/containers";
-import React, { memo } from "react";
+import React, { lazy, Suspense } from "react";
 
-const MemoizedHeader = memo(Header);
+const LazyHeader = lazy(() => import("@/component/header"));
+const LazyBodyCalendar = lazy(() => import("@/containers/body-calendar"));
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-white">
-      <MemoizedHeader />
-      <BodyCalendar />
-      <Footer />
+    <main className="flex flex-col min-h-screen bg-white">
+      <Suspense fallback={<div>Cargando...</div>}>
+        <LazyHeader />
+      </Suspense>
+
+      <Suspense fallback={<div>Cargando...</div>}>
+        <LazyBodyCalendar />
+      </Suspense>
     </main>
   );
 }

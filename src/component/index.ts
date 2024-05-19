@@ -1,4 +1,7 @@
 import Header from "./header";
 import DayCard from "./day-card";
 import Footer from "./footer";
-export { Header, DayCard, Footer };
+import ModalComponent from "./modal";
+import TooltipComponent from "./tooltip";
+
+export { Header, DayCard, Footer, ModalComponent, TooltipComponent };
