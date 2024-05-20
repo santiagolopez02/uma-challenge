@@ -5,9 +5,9 @@
  */
 export default function getDay(dateString: string): string {
   if (!dateString) return "";
-  const fecha: Date = new Date(dateString);
+  const date: Date = new Date(dateString);
 
-  const nombresDias: string[] = [
+  const nameDays: string[] = [
     "Domingo",
     "Lunes",
     "Martes",
@@ -17,7 +17,7 @@ export default function getDay(dateString: string): string {
     "Sábado",
   ];
 
-  const numeroDia: number = fecha.getDay();
+  const numberDay: number = date.getDay();
 
-  return nombresDias[numeroDia];
+  return nameDays[numberDay];
 }

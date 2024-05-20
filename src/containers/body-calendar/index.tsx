@@ -127,15 +127,16 @@ const BodyCalendar: React.FC<any> = () => {
         </button>
       </div>
       {loading ? (
-        <div>Buscando imágenes...</div>
+        <div>Cargando calendario...</div>
       ) : (
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {imageDays &&
             imageDays.map((item, index) => (
               <Suspense key={index} fallback={<div>...</div>}>
                 <LazyDayCard
-                  image={item.url}
-                  comments={item.explanation}
+                  id_img={item.id_img}
+                  url={item.url}
+                  comment={item.explanation}
                   date={item.date}
                   title={item.title}
                   media_type={item.media_type}

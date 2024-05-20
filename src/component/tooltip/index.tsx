@@ -13,8 +13,7 @@ const TooltipComponent: React.FC<TooltipProps> = ({ content, name }) => {
         >
           <AiOutlineInfoCircle className="text-nasa-gray-light" />
         </Tooltip.Trigger>
-        <Tooltip.Content className="bg-gray-200 text-11 p-2 w-[400px] flex flex-col justify-center items-center text-center z-50">
-          <AiOutlineInfoCircle className="text-nasa-gray-light" />
+        <Tooltip.Content className="bg-gray-200 text-[10px] p-2 w-[400px] flex flex-col justify-center items-center text-center z-50">
           {content}
         </Tooltip.Content>
       </Tooltip.Root>

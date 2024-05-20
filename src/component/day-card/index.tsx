@@ -4,19 +4,22 @@ import React, {
   lazy,
   Suspense,
   startTransition,
+  useEffect,
 } from "react";
 import { DayCardProps } from "@/types";
 import Image from "next/image";
 import TooltipComponent from "../tooltip";
 import getDay from "@/utils/get-day";
+import Comment from "@/types/comment";
 
 const ModalComponent = lazy(() => import("@/component/modal"));
 
 const DayCard: React.FC<DayCardProps> = ({
-  image,
+  id_img,
+  url,
   title,
   date,
-  comments,
+  comment,
   media_type,
 }) => {
   const [open, setOpen] = useState<boolean>(false);
@@ -26,7 +29,9 @@ const DayCard: React.FC<DayCardProps> = ({
       setOpen(true);
     });
   }, []);
+
   const dayOfWeek: string = getDay(date);
+
   return (
     <>
       <div
@@ -35,7 +40,7 @@ const DayCard: React.FC<DayCardProps> = ({
       >
         {media_type === "image" && (
           <Image
-            src={image}
+            src={url}
             alt={title}
             fill
             className="rounded-xl opacity-85 hover:opacity-100"
@@ -43,7 +48,9 @@ const DayCard: React.FC<DayCardProps> = ({
           />
         )}
         {media_type === "video" && (
-          <div className="w-full h-full bg-nasa-gray-warm-dark rounded-xl"></div>
+          <div className="w-full h-full bg-nasa-gray-dark rounded-xl flex flex-col justify-center items-center text-white">
+            Video
+          </div>
         )}
 
         <div className="absolute top-0 right-3">
@@ -53,7 +60,7 @@ const DayCard: React.FC<DayCardProps> = ({
         </div>
         <div className="absolute top-6 right-3">
           <div className="flex flex-row gap-2 justify-start">
-            <TooltipComponent content={comments} name={title} />
+            <TooltipComponent content={comment} name={title} />
             <p className="text-white font-nasa ">{date}</p>
           </div>
         </div>
@@ -62,11 +69,12 @@ const DayCard: React.FC<DayCardProps> = ({
         </div>
       </div>
       {open && (
-        <Suspense fallback={<div>Cargando...</div>}>
+        <Suspense fallback={<div></div>}>
           <ModalComponent
-            comments={[comments]}
+            id_img={id_img}
+            media_type={media_type}
             date={date}
-            image={image}
+            url={url}
             state={open}
             title={title}
             setState={setOpen}

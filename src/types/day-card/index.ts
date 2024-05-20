@@ -1,7 +1,8 @@
 export default interface DayCardProps {
-  image: string;
+  id_img: string;
+  url: string;
   title: string;
   date: string;
-  comments: string;
+  comment: string;
   media_type: string;
 }

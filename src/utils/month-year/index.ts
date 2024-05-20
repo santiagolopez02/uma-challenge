@@ -7,7 +7,7 @@
  */
 export default function getStringMonthAndYear(date: string): string {
   if (!date) return "";
-  const meses: string[] = [
+  const months: string[] = [
     "Enero",
     "Febrero",
     "Marzo",
@@ -24,5 +24,5 @@ export default function getStringMonthAndYear(date: string): string {
 
   const [year, month] = date.split("-");
 
-  return `${meses[parseInt(month) - 1]} - ${year}`;
+  return `${months[parseInt(month) - 1]} - ${year}`;
 }
