@@ -46,7 +46,7 @@ const DayCard: React.FC<DayCardProps> = ({
           />
         )}
         {media_type === "video" && (
-          <div className="w-full h-full bg-nasa-gray-dark rounded-xl flex flex-col justify-center items-center text-white">
+          <div className="w-full h-full text-[10px] md:text-[17px] bg-nasa-gray-dark rounded-xl flex flex-col justify-center items-center text-white">
             Video
           </div>
         )}
@@ -59,11 +59,15 @@ const DayCard: React.FC<DayCardProps> = ({
         <div className="absolute top-6 right-3">
           <div className="flex flex-row gap-2 justify-start">
             <TooltipComponent content={comment} name={title} />
-            <p className="text-white font-nasa ">{date}</p>
+            <p className="text-white font-nasa text-[10px] md:text-[15px] ">
+              {date}
+            </p>
           </div>
         </div>
         <div className="absolute bottom-2 left-2">
-          <p className="text-white font-nasa">{title}</p>
+          <p className="text-white font-nasa  text-[10px] md:text-[15px] underline">
+            {title}
+          </p>
         </div>
       </div>
       {open && (
