@@ -7,11 +7,11 @@ import React, {
 } from "react";
 import { DayCardProps } from "@/types";
 import Image from "next/image";
-import TooltipComponent from "../tooltip";
+
 import getDay from "@/utils/get-day";
 
 const ModalComponent = lazy(() => import("@/component/modal"));
-
+const TooltipComponentLazy = lazy(() => import("@/component/tooltip"));
 const DayCard: React.FC<DayCardProps> = ({
   id_img,
   url,
@@ -58,7 +58,10 @@ const DayCard: React.FC<DayCardProps> = ({
         </div>
         <div className="absolute top-6 right-3">
           <div className="flex flex-row gap-2 justify-start">
-            <TooltipComponent content={comment} name={title} />
+            <Suspense fallback={<div></div>}>
+              <TooltipComponentLazy content={comment} name={title} />
+            </Suspense>
+
             <p className="text-white font-nasa text-[10px] md:text-[15px] ">
               {date}
             </p>
@@ -75,6 +78,7 @@ const DayCard: React.FC<DayCardProps> = ({
           <ModalComponent
             id_img={id_img}
             media_type={media_type}
+            comment={comment}
             date={date}
             url={url}
             state={open}

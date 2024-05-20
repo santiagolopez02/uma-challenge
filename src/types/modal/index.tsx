@@ -4,6 +4,7 @@ export default interface ModalProps {
   title: string;
   date: string;
   state: boolean;
+  comment: string;
   media_type: string;
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 }

@@ -1,4 +1,11 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  Suspense,
+  lazy,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { ModalProps } from "@/types";
 import Image from "next/image";
@@ -6,7 +13,9 @@ import Link from "next/link";
 import Video from "../video";
 import Comment from "@/types/comment";
 import apiCommentService from "@/models/api-comment";
-import { ErrorMessage } from "@/component";
+import { ErrorMessage, TooltipComponent } from "@/component";
+
+const TooltipComponentLazy = lazy(() => import("@/component/tooltip"));
 const ModalComponent: React.FC<ModalProps> = ({
   id_img,
   title,
@@ -14,6 +23,7 @@ const ModalComponent: React.FC<ModalProps> = ({
   url,
   state,
   media_type,
+  comment,
   setState,
 }) => {
   const [commentsUsers, setCommentsUsers] = useState<Comment[]>([]);
@@ -60,6 +70,11 @@ const ModalComponent: React.FC<ModalProps> = ({
           <Dialog.Title className="font-nasa m-0 text-[10px] md:text-[17px] font-semibold ">
             <span className="text-nasa-blue">{title}</span> -
             <span className="ml-2 text-nasa-red">{date}</span>
+            <div className="hidden md:inline text-center">
+              <Suspense fallback={<div></div>}>
+                <TooltipComponentLazy content={comment} name={title} />
+              </Suspense>
+            </div>
           </Dialog.Title>
           <Dialog.Description className="mt-[10px] mb-5 flex flex-col items-center ">
             {media_type === "image" && (
