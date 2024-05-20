@@ -54,17 +54,10 @@ Ensure you have the following software installed:
 
 5. Running the ESLint
 
-   -To build the project:
+   -To compiles the code with ESlint.
 
    ```sh
-   npm run build
-
-   ```
-
-   -To compiles the code and starts the server in development mode with automatic reload.
-
-   ```sh
-   npm run dev
+   npm run lint
 
    ```
 
