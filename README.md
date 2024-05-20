@@ -2,14 +2,14 @@
 
 ## Project Description
 
-This project is an API for managing comments, built with Node.js, TypeScript, and Prisma ORM. It uses Express.js for the server framework.
+This project is a Next.js app web.
 
 ## Prerequisites
 
 Ensure you have the following software installed:
 
 - [Node.js](https://nodejs.org/en/download/) (version 14 or higher)
-- [npm](https://www.npmjs.com/get-npm) or [Yarn](https://yarnpkg.com/getting-started/install)
+- [npm](https://www.npmjs.com/get-npm)
 
 ## Installation
 
