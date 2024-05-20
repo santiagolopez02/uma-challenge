@@ -6,6 +6,7 @@ import Link from "next/link";
 import Video from "../video";
 import Comment from "@/types/comment";
 import apiCommentService from "@/models/api-comment";
+import { ErrorMessage } from "@/component";
 const ModalComponent: React.FC<ModalProps> = ({
   id_img,
   title,
@@ -17,6 +18,7 @@ const ModalComponent: React.FC<ModalProps> = ({
 }) => {
   const [commentsUsers, setCommentsUsers] = useState<Comment[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
   const cache = useRef<{ [key: string]: Comment[] }>({});
 
   const fetchData = useCallback(async (id_img: string) => {
@@ -29,8 +31,8 @@ const ModalComponent: React.FC<ModalProps> = ({
       } else {
         setCommentsUsers(cache.current[id_img]);
       }
-    } catch (error) {
-      console.error("Error fetchData ", error);
+    } catch (err) {
+      setError("Error al cargar los comentarios");
     }
   }, []);
 
@@ -43,11 +45,10 @@ const ModalComponent: React.FC<ModalProps> = ({
   const handleSave = async () => {
     try {
       const response = await apiCommentService.create(id_img, inputValue);
-
       setCommentsUsers([...commentsUsers, response]);
       setInputValue("");
-    } catch (error) {
-      console.error("Error al procesar la solicitud:", error);
+    } catch (err) {
+      setError("Error al guardar el comentario");
     }
   };
 
@@ -90,14 +91,16 @@ const ModalComponent: React.FC<ModalProps> = ({
                   </Dialog.Description>
                 ))
               : null}
+            {error && <ErrorMessage message={error} />}
           </div>
 
           <fieldset className="mb-[15px] flex items-center gap-5 mt-2">
             <input
               type="text"
               required
-              className="text-nasa shadow-nasa-gray-dark focus:shadow-nasa-gray-light inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
+              className="text-nasa disabled:cursor-not-allowed shadow-nasa-gray-dark focus:shadow-nasa-gray-light inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
               id="comment"
+              disabled={error ? true : false}
               placeholder="Agrega un comentario..."
               value={inputValue}
               onChange={(e) => {
@@ -111,8 +114,9 @@ const ModalComponent: React.FC<ModalProps> = ({
               aria-label="Guardar"
               type="button"
               name="save"
+              disabled={error ? true : false}
               onClick={handleSave}
-              className="bg-white text-nasa-gray-dark hover:bg-nasa-gray-light focus:shadow-red-950 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
+              className="bg-white disabled:opacity-50 disabled:cursor-not-allowed  text-nasa-gray-dark hover:bg-nasa-gray-light focus:shadow-red-950 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
             >
               Guardar
             </button>

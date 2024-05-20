@@ -57,10 +57,6 @@ const apiCommentService: ApiCommentService = {
 
       return commentResponse;
     } catch (error) {
-      console.error(
-        "Error fetching data in create comment from Comment-API",
-        error
-      );
       throw new Error(
         "Failed to fetch data in create comment from Comment-API"
       );

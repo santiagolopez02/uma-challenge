@@ -4,13 +4,11 @@ import React, {
   lazy,
   Suspense,
   startTransition,
-  useEffect,
 } from "react";
 import { DayCardProps } from "@/types";
 import Image from "next/image";
 import TooltipComponent from "../tooltip";
 import getDay from "@/utils/get-day";
-import Comment from "@/types/comment";
 
 const ModalComponent = lazy(() => import("@/component/modal"));
 
@@ -35,6 +33,7 @@ const DayCard: React.FC<DayCardProps> = ({
   return (
     <>
       <div
+        data-testid="daycard"
         className="relative w-[250px] h-[250px] rounded-xl cursor-pointer shadow hover:shadow-md hover:shadow-nasa-gray-warm-dark"
         onClick={handleOpen}
       >

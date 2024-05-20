@@ -10,10 +10,16 @@ import { apiService } from "@/models";
 import ImageInterface from "@/types/image";
 import getStringMonthAndYear from "@/utils/month-year";
 import getFirstAndLastDayOfMonth from "@/utils/range-month";
+import { ErrorMessage } from "@/component";
 
 const LazyDayCard = lazy(() => import("@/component/day-card"));
 
 const BodyCalendar: React.FC<any> = () => {
+  /**
+   *
+   * States
+   *
+   */
   const [monthOffset, setMonthOffset] = useState<number>(0);
   const [monthYear, setMonthYear] = useState<string>("");
   const [rangeDays, setRangeDays] = useState<{
@@ -23,6 +29,8 @@ const BodyCalendar: React.FC<any> = () => {
   const [imageDays, setImageDays] = useState<ImageInterface[]>();
   const [loading, setLoading] = useState<boolean>(false);
   const [isCurrentMonth, setIsCurrentMonth] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>();
+
   const cache = useRef<{ [key: string]: ImageInterface[] }>({});
 
   /**
@@ -57,7 +65,7 @@ const BodyCalendar: React.FC<any> = () => {
         setImageDays(cache.current[rangeKey]);
       }
     } catch (error) {
-      console.error("Error fetchData ", error);
+      setError("Error al cargar las imagenes");
     } finally {
       setLoading(false);
     }
@@ -145,6 +153,7 @@ const BodyCalendar: React.FC<any> = () => {
             ))}
         </div>
       )}
+      {error && <ErrorMessage message={error} />}
     </section>
   );
 };
