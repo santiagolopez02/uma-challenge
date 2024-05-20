@@ -8,13 +8,7 @@ const Home: NextPage = () => {
     <>
       <div className="flex min-h-screen items-center justify-center bg-gray-100">
         <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center gap-2">
-          <Image
-            alt="log"
-            src="/logos/logo.png"
-            width={200}
-            height={200}
-            priority
-          />
+          <Image alt="log" src="/logos/logo.png" width={200} height={200} />
           <h1 className="text-24 md:text-3xl font-bold font-nasa mb-8">
             Bienvenidx a Nasa Calendar
           </h1>

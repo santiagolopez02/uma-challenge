@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+import TerserPlugin from "terser-webpack-plugin";
+
 const nextConfig = {
   images: {
     domains: ["apod.nasa.gov", "localhost"],
@@ -9,6 +11,31 @@ const nextConfig = {
         pathname: "**",
       },
     ],
+  },
+  webpack: (config, { isServer, webpack }) => {
+    if (!isServer) {
+      config.optimization.minimizer.push(
+        new TerserPlugin({
+          terserOptions: {
+            compress: {
+              ecma: 2015,
+              warnings: false,
+              comparisons: false,
+              inline: 2,
+            },
+            output: {
+              ecma: 2015,
+              comments: false,
+              ascii_only: true,
+            },
+            mangle: {
+              safari10: true,
+            },
+          },
+        })
+      );
+    }
+    return config;
   },
 };
 

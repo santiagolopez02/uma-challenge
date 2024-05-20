@@ -10,8 +10,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
         />
+        <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
       </Head>
       <Component {...pageProps} />
     </>

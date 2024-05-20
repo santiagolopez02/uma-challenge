@@ -43,7 +43,6 @@ const DayCard: React.FC<DayCardProps> = ({
             alt={title}
             fill
             className="rounded-xl opacity-85 hover:opacity-100"
-            priority
           />
         )}
         {media_type === "video" && (
