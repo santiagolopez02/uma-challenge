@@ -32,9 +32,11 @@ Ensure you have the following software installed:
 
    - Create a .env file in the root directory of the project with the following configuration (adjust the values according to your environment)
 
-   NEXT_PUBLIC_API_NASA_URL=https://api.nasa.gov/planetary/apod
-   NEXT_PUBLIC_API_NASA_TOKEN=your_api_token
-   NEXT_PUBLIC_API_COMMENT_URL=your_comment_api_url
+   -NEXT_PUBLIC_API_NASA_URL=https://api.nasa.gov/planetary/apod
+
+   -NEXT_PUBLIC_API_NASA_TOKEN=your_api_token
+
+   -NEXT_PUBLIC_API_COMMENT_URL=your_comment_api_url
 
 4. Running the Application
 
